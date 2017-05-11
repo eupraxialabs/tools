@@ -18,19 +18,19 @@ To run:
    ```
    # yum install atomic
    ```
-2. If you are at Atomic Host, you have `atomic` tool pre-installed and thus you can directly call
+2. If you are on an Atomic Host, you have the `atomic` tool pre-installed and you can run the tools image:
 
    ```
    # atomic run eupraxialabs/tools:1.1
    ```
 
-   to get a shell in the tools container, or
+   which will get you a bash  shell in the tools container, or
 
    ```
    # atomic run eupraxialabs/tools:1.1 <command>
    ```
 
-   to run a specific command. For example:
+   which will run a specific command. For example:
 
    ```
    # atomic run eupraxialabs/tools:1.1 man systemd
