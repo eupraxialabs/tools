@@ -1,4 +1,4 @@
-dockerfiles-centos-tools
+dockerfiles-eupraxialabs-tools
 ========================
 
 Dockerfile to build a very useful tools image on CentOS 7
