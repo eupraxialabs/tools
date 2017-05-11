@@ -39,7 +39,7 @@ To run:
 `atomic` tool uses image labels to figure out the `docker run` command. You can check the [RUN label](https://github.com/projectatomic/atomic/blob/master/docs/atomic-run.1.md) by calling
 
 ```
-docker inspect -f '{{.Config.Labels.RUN}}' eupraxialabs/tools
+docker inspect -f '{{.Config.Labels.RUN}}' eupraxialabs/tools:1.1
 ```
 Let's look at a special tool while inside the container. The command ssh-import-id will allow us to easy add users that need to ssh into any Atomic Host. It does this by pulling a public key from either Launchpad or GitHub and appending it to a <user>/.ssh/authorized_keys file.
 
