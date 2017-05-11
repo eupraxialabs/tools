@@ -14,7 +14,7 @@ To build, copy the sources down from GitHub and call:
 
 To run:
 
-1. Not running on Atomic Host? Install the `atomic` tool with:
+1. Not running on an Atomic Host? Install the `atomic` tool with:
    ```
    # yum install atomic
    ```
@@ -30,7 +30,9 @@ To run:
    # atomic run eupraxialabs/tools:1.1 <command>
    ```
 
-   which will run a specific command. For example:
+   which will run a specific command. 
+
+   For example:
 
    ```
    # atomic run eupraxialabs/tools:1.1 man systemd
