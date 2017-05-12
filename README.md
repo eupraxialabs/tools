@@ -45,9 +45,9 @@ docker inspect -f '{{.Config.Labels.RUN}}' eupraxialabs/tools
 
 Let's look at a special tool in the bag: ssh-import-id
 
-As a brief introduction, 'ssh-import-id' is similar to the ssh-copy-id command.  'ssh-copy-id' pushes your public key into a remote ~/.ssh/authorized_keys file, whereas ssh-import-id pulls a public key into the local ~/.ssh/authorized_keys.  In cloud instances, it's an efficient way to securely and conveniently retrieve and install your own SSH public key, or perhaps that of a colleague who needs access to the server.
+As a brief introduction, 'ssh-import-id' is similar to the ssh-copy-id command.  'ssh-copy-id' pushes your public key into a remote ~/.ssh/authorized_keys file, whereas 'ssh-import-id' pulls a public key into the local ~/.ssh/authorized_keys.  In cloud instances, it's an efficient way to securely and conveniently retrieve and install your own SSH public key, or perhaps that of a colleague who needs access to the server.
 
-The command ssh-import-id will allow us to easy add users that need to ssh into any Atomic Host. It does this by pulling a public key from either Launchpad or GitHub and appending it to a <user>/.ssh/authorized_keys file.
+The command 'ssh-import-id' will allow us to easy add users that need to ssh into any Atomic Host. It does this by pulling a public key from either Launchpad or GitHub and appending it to a <user>/.ssh/authorized_keys file.
 
 ```
 
@@ -61,11 +61,12 @@ The command ssh-import-id will allow us to easy add users that need to ssh into 
 ```
 Let's take a look:
 
-'''
+```
 [centos@atomic1 ~]$ cat ~/.ssh/authorized_keys
 
 ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCm/b4yF+BtZWlEbvLzTxouU0dPbCW+YOXgAJjPujSgHWSj/xzZj0jGgRzGKzWzYv1kEwbgF7t6T5tiMs8StVg1lLtjqRtRBtjRjzDqZbUuQ74n2sqE0tCk0r/TwYfPZBYXGIgJSV3/m8kkcg5j4uPp2v6ejGwOnVn0C/ud7lzie8BJtzMaXZqIrAqguP8EomBxI2zZgsUD/mFT1RTYFNNe6DNSQFJVP1hj6tVnCXEOsM5Rwz9T6Wu5jZ5wymx2F9V9V+H7PUBUAYHAFLdHZMgb/vWVeUzCrveIPnf/E47QI6F9sxXHJeSJ3+Ivn4b6rR/PXjUX3LhT/UIpyLHeixFd davidjbrewer@github/15127404 # ssh-import-id gh:davidjbrewer
-'''
+
+```
 As you can see, it's commented that the user's public key was added by the 'ssh-import-id' command.
 
 This added a specific user's public portion of his ssh key and that user can now access the Atomic Host from the user's client machine.
@@ -76,3 +77,7 @@ $ ssh centos@atomic-master.eupraxialabs.com
 Last login: Fri May 12 07:51:56 2017 from 192.168.0.151
 [centos@atomic1 ~]$
 ```
+The user can now successfully login without providing credentials.
+
+This is an illustration of the use of 'ssh-import-id' and, of course, multiple users sharing the same user account is not a good practice.
+User accounts should be created and the Atomic host SysAdmin will have their  public keys added to /home/<user>/.ssh/authorized keys.
