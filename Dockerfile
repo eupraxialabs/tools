@@ -2,6 +2,8 @@ FROM centos:centos7.3.1611
 MAINTAINER David J. Brewer <davidjbrewer@eupraxialabs.com>
 
 ENV container docker
+ENV DOWNLOAD /tmp/download/
+
 LABEL RUN="docker run -it --name NAME --privileged --ipc=host --net=host --pid=host -e HOST=/host -e NAME=NAME -e IMAGE=IMAGE -v /sys/fs/selinux:/sys/fs/selinux:ro -v /run:/run -v /var/log:/var/log -v /etc/localtime:/etc/localtime -v /:/host IMAGE"
 
 USER root
@@ -81,9 +83,14 @@ RUN yum -y install \
            rootfiles \
            python \
            yum-utils
+# install 'pip' to support the use of tool 'ssh-import-id'
 
-RUN yum -y install python-pip
-RUN yum clean all
+# DOWNLOAD packages 
+RUN mkdir $DOWNLOAD \
+    && cd $DOWNLOAD
+
+RUN curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
+RUN python get-pip.py
 RUN pip install ssh-import-id
 # Set default command
 CMD ["/usr/bin/bash"]

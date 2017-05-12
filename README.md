@@ -52,11 +52,27 @@ The command ssh-import-id will allow us to easy add users that need to ssh into 
 ```
 
 [centos@atomic1 ~]$ docker exec -it <containerID> bash
+
 [root@atomic1 /]# ssh-import-id gh:davidjbrewer --output /host/home/centos/.ssh/authorized_keys
+2017-05-12 07:53:13,114 INFO Starting new HTTPS connection (1): api.github.com
+2017-05-12 07:53:13,708 INFO Authorized key ['2048', '94:af:9f:fa:ca:77:93:3f:31:c3:0d:6f:c2:fd:0d:cc', 'davidjbrewer@github/15127404', '(RSA)']
+2017-05-12 07:53:13,709 INFO [1] SSH keys [Authorized
 
 ```
+Let's take a look:
+
+'''
+[centos@atomic1 ~]$ cat ~/.ssh/authorized_keys
+
+ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCm/b4yF+BtZWlEbvLzTxouU0dPbCW+YOXgAJjPujSgHWSj/xzZj0jGgRzGKzWzYv1kEwbgF7t6T5tiMs8StVg1lLtjqRtRBtjRjzDqZbUuQ74n2sqE0tCk0r/TwYfPZBYXGIgJSV3/m8kkcg5j4uPp2v6ejGwOnVn0C/ud7lzie8BJtzMaXZqIrAqguP8EomBxI2zZgsUD/mFT1RTYFNNe6DNSQFJVP1hj6tVnCXEOsM5Rwz9T6Wu5jZ5wymx2F9V9V+H7PUBUAYHAFLdHZMgb/vWVeUzCrveIPnf/E47QI6F9sxXHJeSJ3+Ivn4b6rR/PXjUX3LhT/UIpyLHeixFd davidjbrewer@github/15127404 # ssh-import-id gh:davidjbrewer
+'''
+As you can see, it's commented that the user's public key was added by the 'ssh-import-id' command.
+
 This added a specific user's public portion of his ssh key and that user can now access the Atomic Host from the user's client machine.
+
 
 ```
 $ ssh centos@atomic-master.eupraxialabs.com
+Last login: Fri May 12 07:51:56 2017 from 192.168.0.151
+[centos@atomic1 ~]$
 ```
