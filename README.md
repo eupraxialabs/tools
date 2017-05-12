@@ -1,4 +1,4 @@
-dockerfiles-eupraxialabs-tools
+dockerfiles-centos-tools
 ========================
 
 Dockerfile to build a very useful tools image on CentOS 7
@@ -14,25 +14,23 @@ To build, copy the sources down from GitHub and call:
 
 To run:
 
-1. Not running on an Atomic Host? Install the `atomic` tool with:
+1. Not running on Atomic Host? Install the `atomic` tool with:
    ```
    # yum install atomic
    ```
-2. If you are on an Atomic Host, you have the `atomic` tool pre-installed and you can run the tools image:
+2. If you are at Atomic Host, you have `atomic` tool pre-installed and thus you can directly call
 
    ```
    # atomic run eupraxialabs/tools:1.1
    ```
 
-   which will get you a bash  shell in the tools container, or
+   to get a shell in the tools container, or
 
    ```
    # atomic run eupraxialabs/tools:1.1 <command>
    ```
 
-   which will run a specific command. 
-
-   For example:
+   to run a specific command. For example:
 
    ```
    # atomic run eupraxialabs/tools:1.1 man systemd
@@ -41,13 +39,24 @@ To run:
 `atomic` tool uses image labels to figure out the `docker run` command. You can check the [RUN label](https://github.com/projectatomic/atomic/blob/master/docs/atomic-run.1.md) by calling
 
 ```
-docker inspect -f '{{.Config.Labels.RUN}}' eupraxialabs/tools:1.1
+docker inspect -f '{{.Config.Labels.RUN}}' eupraxialabs/tools
 ```
-Let's look at a special tool while inside the container. The command ssh-import-id will allow us to easy add users that need to ssh into any Atomic Host. It does this by pulling a public key from either Launchpad or GitHub and appending it to a <user>/.ssh/authorized_keys file.
+#### Special Tool in the Bag
+
+Let's look at a special tool in the bag: ssh-import-id
+
+As a brief introduction, 'ssh-import-id' is similar to the ssh-copy-id command.  'ssh-copy-id' pushes your public key into a remote ~/.ssh/authorized_keys file, whereas ssh-import-id pulls a public key into the local ~/.ssh/authorized_keys.  In cloud instances, it's an efficient way to securely and conveniently retrieve and install your own SSH public key, or perhaps that of a colleague who needs access to the server.
+
+The command ssh-import-id will allow us to easy add users that need to ssh into any Atomic Host. It does this by pulling a public key from either Launchpad or GitHub and appending it to a <user>/.ssh/authorized_keys file.
 
 ```
+
+[centos@atomic1 ~]$ docker exec -it <containerID> bash
 [root@atomic1 /]# ssh-import-id gh:davidjbrewer --output /host/home/centos/.ssh/authorized_keys
 
+```
+This added a specific user's public portion of his ssh key and that user can now access the Atomic Host from the user's client machine.
 
-
+```
+$ ssh centos@atomic-master.eupraxialabs.com
 ```
