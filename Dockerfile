@@ -1,4 +1,4 @@
-FROM centos:centos7
+FROM centos:centos7.3.1611
 MAINTAINER David J. Brewer <davidjbrewer@eupraxialabs.com>
 
 ENV container docker
@@ -81,6 +81,6 @@ RUN yum -y install \
 
 RUN yum install -y python-pip
 RUN yum clean all
-RUN pip install ssh-import-id==5.6
+RUN pip install ssh-import-id
 # Set default command
 CMD ["/usr/bin/bash"]
