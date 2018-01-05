@@ -4,6 +4,7 @@ MAINTAINER David J. Brewer <davidjbrewer@eupraxialabs.com>
 ENV container docker
 ENV DOWNLOAD /tmp/download/
 
+
 LABEL RUN="docker run -it --name NAME --privileged --ipc=host --net=host --pid=host -e HOST=/host -e NAME=NAME -e IMAGE=IMAGE -v /sys/fs/selinux:/sys/fs/selinux:ro -v /run:/run -v /var/log:/var/log -v /etc/localtime:/etc/localtime -v /:/host IMAGE"
 
 USER root
