@@ -8,6 +8,7 @@ LABEL RUN="docker run -it --name NAME --privileged --ipc=host --net=host --pid=h
 
 USER root
 
+
 RUN [ -e /etc/yum.conf ] && sed -i '/tsflags=nodocs/d' /etc/yum.conf || true
 
 # Reinstall all packages to get man pages for them
